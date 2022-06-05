@@ -38,17 +38,17 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 
     public function useraddress()
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->hasMany(UserAddress::class, 'user_id');
     }
 
     public function userpayment()
     {
-        return $this->hasMany(UserPayment::class);
+        return $this->hasMany(UserPayment::class, 'user_id');
     }
 }
