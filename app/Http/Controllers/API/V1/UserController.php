@@ -66,6 +66,7 @@ class UserController extends Controller
         if(!Auth::attempt($attrs))
         {
             return response()->json([
+                'success' => false,
                 'statusCode' => 403,
                 'message' => 'Invalid credentials.'
             ]);
@@ -73,6 +74,7 @@ class UserController extends Controller
         $accessToken =Auth::user()->createToken('API Token')->accessToken;
         return response()->json([
             'statusCode' => 200,
+            'success' => true,
             'user' => auth()->user(), 
             'access_token' => $accessToken
         ]);
