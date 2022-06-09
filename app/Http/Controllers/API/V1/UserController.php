@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -47,23 +46,14 @@ class UserController extends Controller
             'password' => bcrypt($attrs['password']),
             'remember_token' => Str::random(60),
         ]);
-
-        $address = UserAddress::create([
-           'user_id' => $user->id,
-           'address_line1' => $request->get('address_line1'),
-           'address_line2' => $request->get('address_line2'),
-           'city'=> $request->get('city')
-        ]);
-
         // return user & token in response
         $token =   $user->createToken('API Token')->accessToken;
         return response()->json([
             'statusCode' => 200,
             'message' => 'user.register',
             'data' => $user,
-            'address' => $address,
             'token' => $token
-        ]);
+        ]);      
     }
     public function login(Request $request)
     {
@@ -85,7 +75,7 @@ class UserController extends Controller
         return response()->json([
             'statusCode' => 200,
             'success' => true,
-            'user' => auth()->user(),
+            'user' => auth()->user(), 
             'access_token' => $accessToken
         ]);
     }
@@ -121,9 +111,9 @@ class UserController extends Controller
     //         'message' => 'user.register',
     //         'data' => $user,
     //         'token' => $response
-    //     ]);
+    //     ]);      
     // }
-
+    
 
     // public function logout (Request $request) {
     //     $token = $request->user()->token();
@@ -144,7 +134,7 @@ class UserController extends Controller
     //         'data' => $user
     //     ]);
     // }
-
+    
     // public function store(Request $request)
     // {
     //     $user = new User();
@@ -153,19 +143,19 @@ class UserController extends Controller
     //     $user->phone_number = $request->get('phone_number');
     //     $user->password = Hash::make($request->get('password'));
     //     $user->save();
-
+        
     //     $token = $user->createToken('API Token')->accessToken;
-
+        
     //     $user->getRememberToken();
     //     return response()->json([
     //         'statusCode' => 200,
     //         'message' => 'user.store',
     //         'data' => $user,
     //         'token' => $token
-    //     ]);
+    //     ]); 
     // }
-
-
+        
+    
 
     // public function register(Request $request)
     // {
@@ -191,7 +181,7 @@ class UserController extends Controller
     //     ]);
 
     //     if (!auth()->attempt($data)) {
-    //         return response(['error_message' => 'Incorrect Details.
+    //         return response(['error_message' => 'Incorrect Details. 
     //         Please try again']);
     //     }
 
@@ -208,9 +198,9 @@ class UserController extends Controller
 
     //     $address->user_id = $user_id;
     //     $address->address_line1	 = $request->get('address_line1');
-    //     $address->address_line2 = $request->get('address_line2');
-    //     $address->city = $request->get('city');
-    //     $address->save();
+    //     $address->address_line2 = $request->get('address_line2');     
+    //     $address->city = $request->get('city');  
+    //     $address->save();        
     // }
 
     // Register user
@@ -228,8 +218,8 @@ class UserController extends Controller
     //     return response()->json([
     //         'user' => $user,
     //         'token' => $user->createToken('secret')->plainTextToken
-    //     ],200);
+    //     ],200);      
     // }
     // Register user
-
+    
 }
