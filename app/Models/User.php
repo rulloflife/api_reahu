@@ -42,12 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function useraddress()
+    public function userAddress()
     {
         return $this->hasMany(UserAddress::class);
     }
 
-    public function userpayment()
+    public function userPayment()
     {
         return $this->hasMany(UserPayment::class);
     }
